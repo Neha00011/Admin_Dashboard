@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white flex flex-col">
+    <div className="fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white flex flex-col">
       <div className="flex items-center justify-center h-20 border-b border-gray-700">
         <FaUser className="text-4xl" />
         <span className="ml-3 text-xl">User</span>
