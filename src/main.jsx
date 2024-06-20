@@ -11,7 +11,7 @@ import {
 import Dashboard from "./Pages/Dashboard.jsx";
 import Tables from "./Pages/Tables.jsx";
 import Charts from "./Pages/Charts.jsx";
-import Calendar from "./Pages/Calendar.jsx";
+import CalendarPage from "./Pages/Calendar.jsx";
 import Kanban from "./Pages/Kanban.jsx";
 
 const router = createBrowserRouter(
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Dashboard />} />
       <Route path="/tables" element={<Tables />} />
       <Route path="/charts" element={<Charts />} />
-      <Route path="/calendar" element={<Calendar />} />
+      <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/kanban" element={<Kanban />} />
     </Route>
   )

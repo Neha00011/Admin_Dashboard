@@ -1,6 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,7 +15,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
+import { Hammer, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -23,6 +29,7 @@ import {
 import { SlGraph } from "react-icons/sl";
 import { FaChartPie } from "react-icons/fa";
 import { IoBarChartSharp } from "react-icons/io5";
+import TablesHeader from "@/components/Tables/TableHeader";
 
 function Charts() {
   const lineChartRef = useRef(null);
@@ -78,31 +85,17 @@ function Charts() {
         pieChartRef.current.chartInstance = new Chart(pieChartRef.current, {
           type: "pie",
           data: {
-            labels: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-            ],
+            labels: ["Item A", "Item B", "Item C", "Item D", "Item E"],
             datasets: [
               {
-                label: "# of Votes",
-                data: [10, 20, 15, 25, 35, 30, 20, 10, 15],
+                label: "# of Sales",
+                data: [30, 50, 20, 10, 40],
                 backgroundColor: [
-                  "red",
-                  "blue",
-                  "yellow",
-                  "green",
-                  "purple",
-                  "orange",
-                  "pink",
-                  "brown",
-                  "gray",
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#4BC0C0",
+                  "#9966FF",
                 ],
               },
             ],
@@ -131,8 +124,8 @@ function Charts() {
             ],
             datasets: [
               {
-                label: "# of Votes",
-                data: [12, 19, 3, 5, 2, 3, 7],
+                label: "Profits",
+                data: [5000, 4000, 3000, 7000, 2000, 6000, 8000],
                 backgroundColor: [
                   "rgba(255, 99, 132, 0.2)",
                   "rgba(54, 162, 235, 0.2)",
@@ -149,6 +142,7 @@ function Charts() {
                   "rgba(75, 192, 192, 1)",
                   "rgba(153, 102, 255, 1)",
                   "rgba(255, 159, 64, 1)",
+                  "rgba(255, 99, 132, 1)",
                 ],
                 borderWidth: 1,
               },
@@ -184,31 +178,7 @@ function Charts() {
 
   return (
     <div className="flex flex-col gap-4">
-      <header className="sticky top-0 z-30 flex items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-        <Breadcrumb className="hidden md:flex">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="#">Dashboard</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="#">charts</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <div className="relative ml-auto flex-1 md:grow-0">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search..."
-            className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-          />
-        </div>
-      </header>
+      <TablesHeader />
       <div className="p-6">
         {/* Page Header */}
         <header className="mb-6">
@@ -218,44 +188,23 @@ function Charts() {
           </p>
         </header>
 
-        {/* Filter Section */}
-        <section className="mb-6">
-          <div className="flex items-center space-x-4">
-            <div>
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Date Range" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Date Range</SelectLabel>
-                    <SelectItem value="apple">Last 7 days</SelectItem>
-                    <SelectItem value="banana">Last 30 days</SelectItem>
-                    <SelectItem value="blueberry">Last 90 days</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </section>
-
         {/* Summary Statistics */}
         <section className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="w-[350px]">
+          <Card className="w-full sm:w-[350px]">
             <CardHeader>
               <CardTitle>Total Sales</CardTitle>
             </CardHeader>
             <CardContent>$12,345</CardContent>
           </Card>
 
-          <Card className="w-[350px]">
+          <Card className="w-full sm:w-[350px]">
             <CardHeader>
               <CardTitle>New Users</CardTitle>
             </CardHeader>
             <CardContent>1,234</CardContent>
           </Card>
 
-          <Card className="w-[350px]">
+          <Card className="w-full sm:w-[350px]">
             <CardHeader>
               <CardTitle>Bounce Rate</CardTitle>
             </CardHeader>
@@ -263,9 +212,37 @@ function Charts() {
           </Card>
         </section>
 
-        {/* Charts Section */}
-        <main className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="shadow-lg rounded-lg overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-6 gap-10">
+          <Card className="w-full sm:w-[350px]">
+            <CardHeader>
+              <CardTitle>Sales</CardTitle>
+              <CardDescription>Monthly sales trends</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2 justify-between">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue>2021</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Year</SelectLabel>
+                      <SelectItem>2021</SelectItem>
+                      <SelectItem>2020</SelectItem>
+                      <SelectItem>2019</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="text"
+                  placeholder="Search"
+                  icon={<Search />}
+                  className="w-1/2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-lg rounded-lg overflow-hidden w-full lg:w-auto">
             <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-between p-4">
               <div>
                 <CardTitle className="text-xl font-semibold">
@@ -279,8 +256,39 @@ function Charts() {
               <canvas ref={lineChartRef}></canvas>
             </CardContent>
           </Card>
+        </div>
 
-          <Card className="shadow-lg rounded-lg overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-6 gap-10">
+          <Card className="w-full sm:w-[350px]">
+            <CardHeader>
+              <CardTitle>Profits</CardTitle>
+              <CardDescription>Monthly profit trends</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2 justify-between">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue>2021</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Year</SelectLabel>
+                      <SelectItem>2021</SelectItem>
+                      <SelectItem>2020</SelectItem>
+                      <SelectItem>2019</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="text"
+                  placeholder="Search"
+                  icon={<Search />}
+                  className="w-1/2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-lg rounded-lg overflow-hidden w-full lg:w-auto">
             <CardHeader className="bg-gradient-to-r from-green-500 to-teal-600 text-white flex items-center justify-between p-4">
               <div>
                 <CardTitle className="text-xl font-semibold">
@@ -295,8 +303,61 @@ function Charts() {
               <canvas ref={barChartRef}></canvas>
             </CardContent>
           </Card>
+        </div>
 
-          <Card className="shadow-lg rounded-lg overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-6 gap-10 w-full">
+          <Card className="w-full sm:w-[350px]">
+            <CardHeader>
+              <CardTitle>Orders</CardTitle>
+              <CardDescription>Monthly order trends</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2 justify-between">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue>2021</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Year</SelectLabel>
+                      <SelectItem>2021</SelectItem>
+                      <SelectItem>2020</SelectItem>
+                      <SelectItem>2019</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="text"
+                  placeholder="Search"
+                  icon={<Search />}
+                  className="w-1/2"
+                />
+              </div>
+              <div className="flex items-center gap-2 justify-between mt-4">
+                <label className="text-sm text-gray-600">Month</label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue>Month</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Month</SelectLabel>
+                      <SelectItem>January</SelectItem>
+                      <SelectItem>February</SelectItem>
+                      <SelectItem>March</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="text"
+                  placeholder="Search"
+                  icon={<Search />}
+                  className="w-1/2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-lg rounded-lg overflow-hidden w-full lg:w-auto">
             <CardHeader className="bg-gradient-to-r from-red-500 to-pink-600 text-white flex items-center justify-between p-4">
               <div>
                 <CardTitle className="text-xl font-semibold">
@@ -310,7 +371,7 @@ function Charts() {
               <canvas ref={pieChartRef}></canvas>
             </CardContent>
           </Card>
-        </main>
+        </div>
       </div>
     </div>
   );
